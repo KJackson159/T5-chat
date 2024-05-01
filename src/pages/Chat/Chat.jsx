@@ -382,7 +382,7 @@ export default function Chat() {
                     }}
                   >
                     <Chip
-                      color={msg.sender === user.uid ? "#fc6f03" : "#ff3c00"}
+                      color={msg.sender === user.uid ? "primary" : "secondary"}
                       label={
                         <Box display="flex" flexDirection="column">
                           <span style={{ fontWeight: "500" }}>
