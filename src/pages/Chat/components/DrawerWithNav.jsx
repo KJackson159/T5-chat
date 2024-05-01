@@ -36,6 +36,7 @@ export function DrawerWithNav(props) {
   const [allRoomIds, setAllRoomIds] = useState([]);
   const [userLimit, setUserLimit] = useState(15);
   const [totalUsers, setTotalUsers] = useState(0);
+  const navigate = useNavigate();
 
   /**
    * @variables
@@ -89,12 +90,6 @@ export function DrawerWithNav(props) {
 
   const handleDrawerClose = () => {
     setOpen(false);
-  };
-
-  const handleGetCert = async (e) => {
-    e.preventDefault();
-    const navigate = useNavigate();
-    navigate("/pairkeys");
   };
 
   React.useEffect(() => {
@@ -340,7 +335,7 @@ export function DrawerWithNav(props) {
                     {myObject.displayName}
                   </Typography>
                 </MenuItem>
-                <MenuItem onClick={handleGetCert}>
+                <MenuItem onClick={() => navigate("/pairkeys")}>
                   <Typography textAlign="center">Get Encrypt-Cert</Typography>
                 </MenuItem>
                 <MenuItem
