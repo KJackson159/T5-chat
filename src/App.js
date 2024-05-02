@@ -10,11 +10,12 @@ import Chat from "./pages/Chat/Chat";
 import PairKeys from "./pages/PairKeys/PairKeys";
 
 function App() {
+  //Login is the "home" route, next is Chat, and then PairKeys (for getting certificate for encryption)
   return (
     <Router>
       <UserAuthContextProvider>
         <Routes>
-          <Route path="/" element={<Login />} />
+          <Route path="/" element={<Login />} /> 
           <Route
             path="/chat"
             element={
