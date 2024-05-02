@@ -17,7 +17,7 @@ export default function Login() {
         case "google":
           (await detectMob()) ? googleSignIn() : googleSignInWithPopup();
           //navigate("/PairKeys");
-          navigate("/chat");
+          navigate("/chat"); //After successful login, navigate to the chat
           break;
         default:
           break;
