@@ -25,7 +25,7 @@ function App() {
               </ProtectedRoute>
             }
           />
-          <Route path="/pairkeys" element={<PairKeys />} />
+          <Route path="/chat/pairkeys" element={<PairKeys />} />
           */
           {/* <Route path='*' element={<PageNotFound />} /> */}
         </Routes>
