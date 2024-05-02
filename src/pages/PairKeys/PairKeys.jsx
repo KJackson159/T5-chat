@@ -11,7 +11,6 @@ const forge = require("node-forge");
 export default function PairKeys() {
   const { user } = useUserAuth();
   const [name, setName] = useState("");
-  //const [isDisabled, setDisabled] = useState(true);
   const navigate = useNavigate();
   var pemFiles;
 
@@ -37,7 +36,7 @@ export default function PairKeys() {
     var attrs = [
       {
         name: "commonName",
-        value: usernameCert, //"Your Name",
+        value: usernameCert, //"Name you entered",
       },
       {
         name: "organizationName",
@@ -75,15 +74,13 @@ export default function PairKeys() {
     console.log("\nCertificate:");
     console.log(pemFiles.certificate);
     uploadCertToDb(pemFiles);
-    //setDisabled(false);
     //upload certificate to database to allow message encryption in chat
     //NOTE: certificate only has public key in it, so private key
     //must be uploaded as a separate file with the certificate.
   };
 
   async function uploadCertToDb(pemFiles){
-    //e.preventDefault();
-    //setDisabled(true);
+    //Object for the user's certificate and pair keys and details of when certificate was signed and when it expires.
     const certObj = {
       userID: user.uid,
       certif: pemFiles.certificate,
@@ -97,7 +94,7 @@ export default function PairKeys() {
       await setDoc(doc(db, "certs", user.uid), certObj)
       .then((res)=>{
       console.log("Certificate uploaded successfully!");
-      navigate("/chat");});
+      navigate("/chat");}); //Navigate back to the chat page
       
     } catch (error) {
       console.error("Error uploading certificate:", error);
@@ -106,8 +103,7 @@ export default function PairKeys() {
 
   const handleCancel = (e) => {
     e.preventDefault();
-    //setDisabled(true);
-    navigate("/chat");
+    navigate("/chat"); //If user changes their mind, they can go back to chat page
   };
 
   return (
