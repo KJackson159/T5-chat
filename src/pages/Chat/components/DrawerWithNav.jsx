@@ -335,7 +335,7 @@ export function DrawerWithNav(props) {
                     {myObject.displayName}
                   </Typography>
                 </MenuItem>
-                <MenuItem onClick={() => navigate("/pairkeys")}>
+                <MenuItem onClick={() => navigate("/chat/pairkeys")}>
                   <Typography textAlign="center">Get Encrypt-Cert</Typography>
                 </MenuItem>
                 <MenuItem
