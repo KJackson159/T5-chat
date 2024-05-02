@@ -172,7 +172,7 @@ export default function Chat() {
    
   }
 
-  function decMessage(encMsg, currUser) {
+  /*function decMessage(encMsg, currUser) {
     //Get your certificate (currUser)
      const q = query(
       collection(db, "certs"),
@@ -187,7 +187,7 @@ export default function Chat() {
     console.log("Decrypted message:", theirMsg);
     return theirMsg;
     }
-    
+    */
 
   function getMessages(roomId) {
     return onSnapshot(
