@@ -157,20 +157,18 @@ export default function Chat() {
 
   function encMessage(myMsg, selPerson) {
     //Get the receiver's certificate (selPerson)
-    //const db = firebase.database();
     const q = query(
       collection(db, "certs"),
       where(documentId(), "==", selPerson)
     );
-    onSnapshot(q, (querySnapshot) => {
-      const data = querySnapshot.docs.data();
-      //Convert FROM pem
-      var publicKey = forge.pki.certificateFromPem(data.pubKey);
-      //Encrypt your message with their certificate
-      var encMsg = publicKey.encrypt(myMsg);
-      console.log("Encrypted message:", encMsg);
-      return encMsg;
-    });
+    
+    const querySnapshot = await getDocs(q);
+    const myData = querySnapshot.docs.map(doc => doc.data());
+    var publicKey = forge.pki.publicKeyFromPem(myData.pubKey);
+    var encMsg = publicKey.encrypt(myMsg);
+    console.log("Encrypted message:", encMsg);
+    return encMsg;
+   
   }
 
   /*function decMessage(encMsg, currUser) {
