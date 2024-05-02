@@ -163,35 +163,30 @@ export default function Chat() {
     );
     
     const querySnapshot = await getDocs(q);
-    const myData = querySnapshot.docs.map(doc => doc.data());
-    var publicKey = forge.pki.publicKeyFromPem(myData.pubKey);
+    const theirData = querySnapshot.docs.map(doc => doc.data());
+    //Encrypt message
+    var publicKey = forge.pki.publicKeyFromPem(theirData.pubKey);
     var encMsg = publicKey.encrypt(myMsg);
     console.log("Encrypted message:", encMsg);
     return encMsg;
    
   }
 
-  /*function decMessage(encMsg, currUser) {
+  function decMessage(encMsg, currUser) {
     //Get your certificate (currUser)
-    //const db = firebase.database();
-    const ref = db.ref("certs");
-    ref
-      .orderByChild("userID")
-      .equalTo(currUser)
-      .once("value")
-      .then((snapshot) => {
-        const data = snapshot.val();
-        //Convert FROM pem
-        const privateKey = forge.pki.privateKeyFromPem(data.prvKey);
-        //Decrypt message sent to you with private key
-        const theirMsg = privateKey.decrypt(encMsg);
-        console.log("Decrypted message:", theirMsg);
-        return theirMsg;
-      })
-      .catch((error) => {
-        console.error("Error retrieving private key:", error);
-      });
-    }*/
+     const q = query(
+      collection(db, "certs"),
+      where(documentId(), "==", currUser)
+    );
+    
+    const querySnapshot = await getDocs(q);
+    const myData = querySnapshot.docs.map(doc => doc.data());
+    //Decrypt message
+    var privateKey = forge.pki.privateKeyFromPem(myData.pubKey);
+    var theirMsg = privateKey.decrypt(encMsg);
+    console.log("Decrypted message:", theirMsg);
+    return theirMsg;
+    }
     
 
   function getMessages(roomId) {
